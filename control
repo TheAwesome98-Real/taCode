@@ -1,0 +1,8 @@
+Package: xyz.awesomedev.tacode
+Name: taCode
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Ever wanted to develop a tweak or app, but Theos is too complicated? taCode can help!
+Maintainer: TheAwesome98 <TheAwesome98@programmer.net>
+Author: TheAwesome98 <TheAwesome98@programmer.net>
+Section: Utilities
