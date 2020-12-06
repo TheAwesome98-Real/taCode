@@ -48,8 +48,8 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete (project name)?" message:@"Are you sure you want to delete (project name)? It will be gone forever (a long time)!" preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }];
+	[_objects removeObjectAtIndex:indexPath.row];
+	[tableView deleteRowsAtIndexPaths:@[ indexPath ] 
         [alertController addAction:deleteAction];
 
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
