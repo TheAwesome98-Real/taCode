@@ -49,7 +49,7 @@
 
         UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
 	[_objects removeObjectAtIndex:indexPath.row];
-	[tableView deleteRowsAtIndexPaths:@[ indexPath ]];
+	[tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
         [alertController addAction:deleteAction];
 }
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
