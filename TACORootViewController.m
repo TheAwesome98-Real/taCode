@@ -45,21 +45,37 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete (project name)?" message:@"Are you sure you want to delete (project name)? It will be gone forever (a long time)!" preferredStyle:UIAlertControllerStyleAlert];
 
-        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-	[_objects removeObjectAtIndex:indexPath.row];
-	[tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [alertController addAction:deleteAction];
-}
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"Didn't need to remove anything");
-        }];
-        [alertController addAction:cancelAction];
+        self.indexPathToBeDeleted = indexPath;
 
-        [self presentViewController:alertController animated:YES completion:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete (project name)?"
+                                                        message:@"Are you sure you want to delete (projecf name)? It will be gone forever (a long time)!"
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              destructiveButtonTitle:@"Delete"];
+        [alert show];
+        // the thing hasnt been done yet so dont do anything
     }
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // Now the thing was pressed so do the thing
+
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Cancel"])
+    {
+        NSLog(@"Canceled");
+    }
+    else if([title isEqualToString:@"Delete"])
+    {
+        NSLog(@"Delete project");
+
+        	[_objects removeObjectAtIndex:indexPath.row];
+	[tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 
 #pragma mark - Table View Delegate
 
