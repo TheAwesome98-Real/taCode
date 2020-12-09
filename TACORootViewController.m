@@ -46,41 +46,40 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
 
-        self.indexPathToBeDeleted = indexPath;
+UIAlertController * alert = [UIAlertController
+                alertControllerWithTitle:@"Delete (project name)?"
+                                 message:@"Are you sure you want to delete (project name)? It will be gone forever (a long time)!"
+                          preferredStyle:UIAlertControllerStyleAlert];
 
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Delete (project name)?"
-                                                        message:@"Are you sure you want to delete (projecf name)? It will be gone forever (a long time)!"
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              destructiveButtonTitle:@"Delete"];
-        [alert show];
-        // the thing hasnt been done yet so dont do anything
-    }
-}
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    // Now the thing was pressed so do the thing
 
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"Cancel"])
-    {
-        NSLog(@"Canceled");
-    }
-    else if([title isEqualToString:@"Delete"])
-    {
-        NSLog(@"Delete project");
+UIAlertAction* yesButton = [UIAlertAction
+                    actionWithTitle:@"Cancel"
+                              style:UIAlertActionStyleCancel
+                            handler:^(UIAlertAction * action) {
+                                // Deletion logic
 
-        	[_objects removeObjectAtIndex:indexPath.row];
+                                [_objects removeObjectAtIndex:indexPath.row];
 	[tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
+                            }];
+
+UIAlertAction* noButton = [UIAlertAction
+                        actionWithTitle:@"Delete"
+                                  style:UIAlertActionStyleDestructive
+                                handler:^(UIAlertAction * action) {
+                                   // Nothing to do
+                                }];
+
+[alert addAction:yesButton];
+[alert addAction:noButton];
+
     }
 }
-
 
 #pragma mark - Table View Delegate
 
-- (void)tableView:(UITableView *)tableView ofdidSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES]; // segue to the project screen here
 }
 
 @end
