@@ -48,7 +48,7 @@
 
 UIAlertController * alert = [UIAlertController
                 alertControllerWithTitle:@"Delete (project name)?"
-                                 message:@"Are you sure you want to delete (project name)? It will be gone forever (a long time)!"
+                                 message:@"Are you sure you want to delete (project name)? It will be moved to (localized rubbish)." // Use string @"Are you sure you want to delete (project name)? It will be gone forever (a long time)!" for perm delete
                           preferredStyle:UIAlertControllerStyleAlert];
 
 
